@@ -1,13 +1,12 @@
 package blockchain.hyperledger.hyperledgerfabric.controller;
 
 import blockchain.hyperledger.hyperledgerfabric.entity.User;
-import blockchain.hyperledger.hyperledgerfabric.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+/*@RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
@@ -33,4 +32,4 @@ public class UserController {
     public void deleteUserById(@PathVariable String id) {
         userService.deleteUserById(id);
     }
-}
+}*/

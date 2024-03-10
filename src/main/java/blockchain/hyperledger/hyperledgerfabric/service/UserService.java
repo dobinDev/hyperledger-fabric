@@ -1,13 +1,12 @@
 package blockchain.hyperledger.hyperledgerfabric.service;
 
 import blockchain.hyperledger.hyperledgerfabric.entity.User;
-import blockchain.hyperledger.hyperledgerfabric.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+/*@Service
 @RequiredArgsConstructor
 public class UserService {
 
@@ -28,4 +27,4 @@ public class UserService {
     public void deleteUserById(String id) {
         userRepository.deleteById(id);
     }
-}
+}*/
