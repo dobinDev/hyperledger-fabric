@@ -13,7 +13,7 @@ public class BlockchainController {
 
     private final ManagedBlockchainService blockchainService;
 
-    @GetMapping("/member")
+    @GetMapping("/member/{memberId}")
     public GetMemberResult getMember(@PathVariable String memberId) {
         return blockchainService.getMember(memberId);
     }
