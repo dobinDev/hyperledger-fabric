@@ -1,14 +1,17 @@
 package blockchain.hyperledger.hyperledgerfabric;
 
-import com.amazonaws.serverless.proxy.model.AwsProxyRequest;
-import com.amazonaws.serverless.proxy.model.AwsProxyResponse;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HyperledgerFabricApplicationTests {
+    static {
+        System.setProperty("com.amazonaws.sdk.disableEc2Metadata", "true");
+    }
 
+    public static void main(String[] args) {
+        SpringApplication.run(HyperledgerFabricApplicationTests.class, args);
+    }
 }
