@@ -74,6 +74,20 @@ public class ManagedBlockchainService {
         return tokenID;
     }*/
 
+    public String mintToken(String tokenId, int CategoryCode, int pollingResultId, String tokenType,
+                            int totalTicket, int amount, String owner) {
+        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+        String channelID = "mychannel";
+        String chaincodeName = "mycc";
+
+        return executeCommand(String.format("docker exec cli peer chaincode query " +
+                "--tls --cafile %s " +
+                "--channelID %s " +
+                "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"]}'",
+                caFilePath, channelID, chaincodeName, tokenId, CategoryCode,
+                pollingResultId, tokenType, totalTicket, amount, owner));
+    }
+
     public String getToken(String tokenId) {
         String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
         String channelID = "mychannel";
