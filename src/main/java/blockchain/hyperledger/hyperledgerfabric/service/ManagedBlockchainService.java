@@ -83,7 +83,7 @@ public class ManagedBlockchainService {
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                 "--tls --cafile %s " +
                 "--channelID %s " +
-                "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"]}'",
+                "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\", \"%d\", \"%d\", \"%s\"]}'",
                 caFilePath, channelID, chaincodeName, tokenId, CategoryCode,
                 pollingResultId, tokenType, totalTicket, amount, owner));
     }
