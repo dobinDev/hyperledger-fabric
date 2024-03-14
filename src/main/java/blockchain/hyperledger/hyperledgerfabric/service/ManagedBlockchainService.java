@@ -85,6 +85,18 @@ public class ManagedBlockchainService {
                 "--name %s -c '{\"Args\":[\"GetToken\", \"%s\"]}'", caFilePath, channelID, chaincodeName, tokenId));
     }
 
+    public String getAllTokens() {
+        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+        String channelID = "mychannel";
+        String chaincodeName = "mycc";
+
+        return executeCommand(String.format("docker exec cli peer chaincode query " +
+                "--tls --cafile %s " +
+                "--channelID %s " +
+                "--name %s -c '{\"Args\":[\"GetAllTokens\"]}'", caFilePath, channelID, chaincodeName));
+
+    }
+
     private String executeCommand(String command) {
         StringBuilder output = new StringBuilder();
 
@@ -113,21 +125,5 @@ public class ManagedBlockchainService {
         }
 
         return output.toString();
-    }
-
-    public String getAllTokens() {
-
-        ProcessBuilder builder = new ProcessBuilder();
-
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel";
-        String chaincodeName = "mycc";
-
-        String tokenID = String.format("docker exec cli peer chaincode query \n" +
-                        "--tls --cafile %s \n" +
-                        "--channelID %s \n" +
-                        "--name %s -c '{\"Args\":[\"GetAllTokens\"]}'", caFilePath, channelID, chaincodeName);
-
-        return tokenID;
     }
 }
