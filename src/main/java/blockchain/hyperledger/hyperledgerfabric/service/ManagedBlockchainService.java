@@ -28,9 +28,9 @@ public class ManagedBlockchainService {
         String channelID = "mychannel";
         String chaincodeName = "mycc";
 
-        String tokenID = String.format("docker exec cli peer chaincode query " +
-                        "--tls --cafile %s " +
-                        "--channelID %s " +
+        String tokenID = String.format("docker exec cli peer chaincode query \n" +
+                        "--tls --cafile %s \n" +
+                        "--channelID %s \n" +
                         "--name %s -c '{\"Args\":[\"GetToken\", \"%s\"]}'", caFilePath, channelID, chaincodeName, tokneId);
 
         return tokenID;
@@ -42,9 +42,9 @@ public class ManagedBlockchainService {
         String channelID = "mychannel";
         String chaincodeName = "mycc";
 
-        String tokenID = String.format("docker exec cli peer chaincode query " +
-                        "--tls --cafile %s " +
-                        "--channelID %s " +
+        String tokenID = String.format("docker exec cli peer chaincode query \n" +
+                        "--tls --cafile %s \n" +
+                        "--channelID %s \n" +
                         "--name %s -c '{\"Args\":[\"GetAllTokens\"]}'", caFilePath, channelID, chaincodeName);
 
         return tokenID;
