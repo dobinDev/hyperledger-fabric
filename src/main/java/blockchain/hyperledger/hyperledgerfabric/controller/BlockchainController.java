@@ -17,4 +17,14 @@ public class BlockchainController {
     public GetMemberResult getMember(@PathVariable String memberId) {
         return blockchainService.getMember(memberId);
     }
+
+    @GetMapping("/token/{tokenId}")
+    public String getToken(@PathVariable String tokenId) {
+        return blockchainService.getToken(tokenId);
+    }
+
+    @GetMapping("/tokens")
+    public String getAllTokens() {
+        return blockchainService.getAllTokens();
+    }
 }
