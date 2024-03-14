@@ -12,9 +12,12 @@ import org.springframework.stereotype.Service;
 public class ManagedBlockchainService {
 
     private final AmazonManagedBlockchain managedBlockchainClient;
+    private final String networkId = "n-QS7KRQW5AJC2PBORGBREFPH3LU";
 
     public GetMemberResult getMember(String memberId) {
-        GetMemberRequest request = new GetMemberRequest().withMemberId(memberId);
+        GetMemberRequest request = new GetMemberRequest()
+                .withNetworkId(networkId)
+                .withMemberId(memberId);
         return managedBlockchainClient.getMember(request);
     }
 }
