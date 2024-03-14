@@ -16,7 +16,8 @@ public class TokenDTO {
     public TokenDTO() {
     }
 
-    public TokenDTO(String tokenId, int categoryCode, int pollingResultId, String tokenType, int totalTicket, int amount, String owner) {
+    public TokenDTO(String tokenId, int categoryCode, int pollingResultId, String tokenType,
+                    int totalTicket, int amount, String owner) {
         this.tokenId = tokenId;
         this.categoryCode = categoryCode;
         this.pollingResultId = pollingResultId;

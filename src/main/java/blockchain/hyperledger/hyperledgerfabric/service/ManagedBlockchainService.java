@@ -74,7 +74,7 @@ public class ManagedBlockchainService {
         return tokenID;
     }*/
 
-    public String mintToken(String tokenId, int CategoryCode, int pollingResultId, String tokenType,
+    public String mintToken(String tokenId, int categoryCode, int pollingResultId, String tokenType,
                             int totalTicket, int amount, String owner) {
         String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
         String channelID = "mychannel";
@@ -84,7 +84,7 @@ public class ManagedBlockchainService {
                 "--tls --cafile %s " +
                 "--channelID %s " +
                 "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\", \"%d\", \"%d\", \"%s\"]}'",
-                caFilePath, channelID, chaincodeName, tokenId, CategoryCode,
+                caFilePath, channelID, chaincodeName, tokenId, categoryCode,
                 pollingResultId, tokenType, totalTicket, amount, owner));
     }
 
