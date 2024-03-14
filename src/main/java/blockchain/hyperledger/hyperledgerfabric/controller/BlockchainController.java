@@ -20,13 +20,13 @@ public class BlockchainController {
     // 토큰 발행
     @PostMapping("/mintToken")
     public String mintToken(
-            @RequestParam String tokenId,
-            @RequestParam int categoryCode,
-            @RequestParam int pollingResultId,
-            @RequestParam String tokenType,
-            @RequestParam int totalTicket,
-            @RequestParam int amount,
-            @RequestParam String owner
+            @PathVariable String tokenId,
+            @PathVariable int categoryCode,
+            @PathVariable int pollingResultId,
+            @PathVariable String tokenType,
+            @PathVariable int totalTicket,
+            @PathVariable int amount,
+            @PathVariable String owner
     ) {
         return blockchainService.mintToken(
                 tokenId,
