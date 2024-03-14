@@ -19,15 +19,23 @@ public class BlockchainController {
 
     // 토큰 발행
     @PostMapping("/mintToken")
-    public String mintToken(@RequestBody TokenDTO tokenDTO) {
+    public String mintToken(
+            @RequestParam String tokenId,
+            @RequestParam int categoryCode,
+            @RequestParam int pollingResultId,
+            @RequestParam String tokenType,
+            @RequestParam int totalTicket,
+            @RequestParam int amount,
+            @RequestParam String owner
+    ) {
         return blockchainService.mintToken(
-                tokenDTO.getTokenId(),
-                tokenDTO.getCategoryCode(),
-                tokenDTO.getPollingResultId(),
-                tokenDTO.getTokenType(),
-                tokenDTO.getTokenTicket(),
-                tokenDTO.getAmount(),
-                tokenDTO.getOwner()
+                tokenId,
+                categoryCode,
+                pollingResultId,
+                tokenType,
+                totalTicket,
+                amount,
+                owner
         );
     }
 
