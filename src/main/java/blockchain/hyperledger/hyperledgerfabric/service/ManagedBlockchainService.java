@@ -32,7 +32,7 @@ public class ManagedBlockchainService {
         String channelID = "mychannel";
         String chaincodeName = "mycc";
 
-        return executeCommand(String.format("docker exec cli peer chaincode query " +
+        return executeCommand(String.format("docker exec cli peer chaincode invoke " +
                 "--tls --cafile %s " +
                 "--channelID %s " +
                 "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\", \"%d\", \"%d\", \"%s\"]}'",
