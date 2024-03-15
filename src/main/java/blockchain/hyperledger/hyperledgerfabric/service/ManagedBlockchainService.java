@@ -26,54 +26,6 @@ public class ManagedBlockchainService {
         return managedBlockchainClient.getMember(request);
     }
 
-    /*public String getToken(String tokneId) {
-
-        try {
-            // 실행할 명령어를 배열로 정의합니다.
-            String[] command = {};
-
-            // ProcessBuilder를 사용하여 외부 명령어를 실행합니다.
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-
-            // 프로세스를 시작하고 실행 결과를 받습니다.
-            Process process = processBuilder.start();
-
-            // 실행 결과를 읽어오기 위한 BufferedReader를 생성합니다.
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-            // 실행 결과를 읽어와 출력합니다.
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
-            }
-
-            // 프로세스가 종료될 때까지 기다립니다.
-            process.waitFor();
-
-            // 프로세스의 종료 코드를 확인합니다.
-            int exitCode = process.exitValue();
-            System.out.println("프로세스 종료 코드 : " + exitCode);
-
-            // 리소스를 해제합니다.
-            reader.close();
-            process.destroy();
-        } catch (IOException | InterruptedException exception) {
-            exception.printStackTrace();
-        }
-
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel";
-        String chaincodeName = "mycc";
-
-        String tokenID = String.format("docker exec cli peer chaincode query \n" +
-                        "--tls --cafile %s \n" +
-                        "--channelID %s \n" +
-                        "--name %s -c '{\"Args\":[\"GetToken\", \"%s\"]}'", caFilePath, channelID, chaincodeName, tokneId);
-
-        return tokenID;
-    }*/
-
     public String mintToken(String tokenId, int categoryCode, int pollingResultId, String tokenType,
                             int totalTicket, int amount, String owner) {
         String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
