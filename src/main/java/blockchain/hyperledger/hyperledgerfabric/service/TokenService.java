@@ -1,30 +1,82 @@
 package blockchain.hyperledger.hyperledgerfabric.service;
 
-import blockchain.hyperledger.hyperledgerfabric.dto.TokenDTO;
+import com.amazonaws.services.managedblockchain.AmazonManagedBlockchain;
+import com.amazonaws.services.managedblockchain.model.GetMemberRequest;
+import com.amazonaws.services.managedblockchain.model.GetMemberResult;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 @Service
+@RequiredArgsConstructor
 public class TokenService {
 
-    private List<TokenDTO> tokenList = new ArrayList<>();
+    public String mintToken(String tokenId, int categoryCode, int pollingResultId, String tokenType,
+                            int totalTicket, int amount) {
+        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+        String channelID = "mychannel1";
+        String chaincodeName = "mycc1";
 
-    // 토큰 생성 메서드
-    public TokenDTO createToken(TokenDTO tokenDTO) {
-        // 토큰을 생성하고 리스트에 추가
-        tokenList.add(tokenDTO);
-        return tokenDTO;
+        return executeCommand(String.format("docker exec cli peer chaincode invoke " +
+                "--tls --cafile %s " +
+                "--channelID %s " +
+                "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\", \"%d\", \"%d\"]}'",
+                caFilePath, channelID, chaincodeName, tokenId, categoryCode, pollingResultId, tokenType, totalTicket, amount));
     }
 
-    // 특정 tokenId에 해당하는 토큰을 찾아 반환하는 메서드
-    public TokenDTO getTokenById(String tokenId) {
-        for (TokenDTO token : tokenList) {
-            if (token.getTokenId().equals(tokenId)) {
-                return token;
+    public String getToken(String tokenId) {
+        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+        String channelID = "mychannel1";
+        String chaincodeName = "mycc1";
+
+        return executeCommand(String.format("docker exec cli peer chaincode query " +
+                "--tls --cafile %s " +
+                "--channelID %s " +
+                "--name %s -c '{\"Args\":[\"GetToken\", \"%s\"]}'", caFilePath, channelID, chaincodeName, tokenId));
+    }
+
+    public String getAllTokens() {
+        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+        String channelID = "mychannel1";
+        String chaincodeName = "mycc1";
+
+        return executeCommand(String.format("docker exec cli peer chaincode query " +
+                "--tls --cafile %s " +
+                "--channelID %s " +
+                "--name %s -c '{\"Args\":[\"GetAllTokens\"]}'", caFilePath, channelID, chaincodeName));
+    }
+
+    private String executeCommand(String command) {
+        StringBuilder output = new StringBuilder();
+
+        try {
+            // ProcessBuilder를 사용하여 외부 명령어를 실행합니다.
+            Process process = new ProcessBuilder("sh", "-c", command).start();
+
+            // 실행 결과를 읽어오기 위한 BufferedReader를 생성합니다.
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+
+            // 실행 결과를 읽어와 StringBuilder에 추가합니다.
+            String line;
+            while ((line = reader.readLine()) != null) {
+                output.append(line).append("\n");
             }
+
+            // 프로세스가 종료될 때까지 기다립니다.
+            process.waitFor();
+
+            // 리소스를 해제합니다.
+            reader.close();
+            process.destroy();
+
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
         }
-        return null; // 특정 tokenId를 가진 토큰을 찾을 수 없는 경우 null 반환
+
+        return output.toString();
     }
 }
