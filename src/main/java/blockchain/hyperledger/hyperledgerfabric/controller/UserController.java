@@ -22,7 +22,7 @@ public class UserController {
         return userService.createUserBlock(nickName, mymPoint, ownedToken);
     }
 
-    @PostMapping("/transferToken")
+    /*@PostMapping("/transferToken")
     public String transferToken(@RequestBody UserDTO userDTO) {
 
         TokenService tokenService1 = new TokenService();
@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("updateMymPoint")
     public String updateMymPoint() {
 
-    }
+    }*/
 
     // 유저 닉네임 조회
     @GetMapping("/user/{nickName}")

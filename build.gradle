@@ -28,7 +28,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // MongoDB
-    /*implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'*/
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     // Google
     implementation group: 'com.google.protobuf', name: 'protobuf-java', version: '3.16.3'
