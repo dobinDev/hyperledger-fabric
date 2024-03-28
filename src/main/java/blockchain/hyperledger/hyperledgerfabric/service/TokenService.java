@@ -15,23 +15,20 @@ import java.io.InputStreamReader;
 @RequiredArgsConstructor
 public class TokenService {
 
-    public String mintToken(String tokenId, int categoryCode, int pollingResultId, String tokenType,
-                            int totalTicket, int amount) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel1";
-        String chaincodeName = "mycc1";
+    String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+    String channelID = "mychannel1";
+    String chaincodeName = "mycc1";
+
+    public String mintToken(String tokenId, int categoryCode, int pollingResultId, String tokenType) {
 
         return executeCommand(String.format("docker exec cli peer chaincode invoke " +
-                "--tls --cafile %s " +
-                "--channelID %s " +
-                "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\", \"%d\", \"%d\"]}'",
-                caFilePath, channelID, chaincodeName, tokenId, categoryCode, pollingResultId, tokenType, totalTicket, amount));
+                        "--tls --cafile %s " +
+                        "--channelID %s " +
+                        "--name %s -c '{\"Args\":[\"MintToken\", \"%s\", \"%d\", \"%d\", \"%s\"]}'",
+                caFilePath, channelID, chaincodeName, tokenId, categoryCode, pollingResultId, tokenType));
     }
 
     public String getToken(String tokenId) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel1";
-        String chaincodeName = "mycc1";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                 "--tls --cafile %s " +
@@ -40,9 +37,6 @@ public class TokenService {
     }
 
     public String getAllTokens() {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel1";
-        String chaincodeName = "mycc1";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                 "--tls --cafile %s " +
@@ -51,6 +45,7 @@ public class TokenService {
     }
 
     private String executeCommand(String command) {
+
         StringBuilder output = new StringBuilder();
 
         try {

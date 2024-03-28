@@ -31,10 +31,7 @@ public class NFT {
     private String tokenType;
 
     @Field
-    private int totalTicket;
-
-    @Field
-    private int amount;
+    private String sellStage;
 
     @Field
     @JsonFormat(pattern = "yyyy.MM.dd/HH:mm/E")

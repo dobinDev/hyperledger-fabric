@@ -4,4 +4,5 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/Test
+      database: test
+      uri: mongodb+srv://mymber:Alaql2022!@cluster-certifie.vkqpd9y.mongodb.net/?retryWrites=true&w=majority

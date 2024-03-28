@@ -18,10 +18,8 @@ public class TokenController {
         int categoryCode = tokenDTO.getCategoryCode();
         int pollingResultId = tokenDTO.getPollingResultId();
         String tokenType = tokenDTO.getTokenType();
-        int totalTicket = tokenDTO.getTotalTicket();
-        int amount = tokenDTO.getAmount();
 
-        return tokenService.mintToken(tokenId, categoryCode, pollingResultId, tokenType, totalTicket, amount);
+        return tokenService.mintToken(tokenId, categoryCode, pollingResultId, tokenType);
     }
 
     // 토큰 ID 조회

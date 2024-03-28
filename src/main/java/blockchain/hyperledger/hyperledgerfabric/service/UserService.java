@@ -11,10 +11,11 @@ import java.io.InputStreamReader;
 @RequiredArgsConstructor
 public class UserService {
 
+    String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
+    String channelID = "mychannel2";
+    String chaincodeName = "mycc2";
+
     public String createUserBlock(String nickName, int mymPoint, String ownedToken[]) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel2";
-        String chaincodeName = "mycc2";
 
         return executeCommand(String.format("docker exec cli peer chaincode invoke " +
                         "--tls --cafile %s " +
@@ -24,9 +25,6 @@ public class UserService {
     }
 
     public String getUser(String nickName) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel2";
-        String chaincodeName = "mycc2";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                 "--tls --cafile %s " +
@@ -35,9 +33,6 @@ public class UserService {
     }
 
     public String getAllUsers() {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychannel2";
-        String chaincodeName = "mycc2";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                 "--tls --cafile %s " +
@@ -46,30 +41,25 @@ public class UserService {
     }
 
     public String transferToken(String from, String to, String tokenId, int amount) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychanne2";
-        String chaincodeName = "mycc2";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                         "--tls --cafile %s " +
                         "--channelID %s " +
-                        "--name %s -c '{\"Args\":[\"TransferToken\", \"%s\", \"%s\", \"%d\"]}'", caFilePath, channelID,
-                chaincodeName, from, to, tokenId, amount));
+                        "--name %s -c '{\"Args\":[\"TransferToken\", \"%s\", \"%s\", \"%d\"]}'",
+                caFilePath, channelID, chaincodeName, from, to, tokenId, amount));
     }
 
     public String updateMymPoint(String nickName, int delta) {
-        String caFilePath = "/opt/home/managedblockchain-tls-chain.pem";
-        String channelID = "mychanne2";
-        String chaincodeName = "mycc2";
 
         return executeCommand(String.format("docker exec cli peer chaincode query " +
                         "--tls --cafile %s " +
                         "--channelID %s " +
-                        "--name %s -c '{\"Args\":[\"UpdateMymPoint\", \"%s\", \"%d\"]}'", caFilePath, channelID,
-                chaincodeName, nickName, delta));
+                        "--name %s -c '{\"Args\":[\"UpdateMymPoint\", \"%s\", \"%d\"]}'",
+                caFilePath, channelID, chaincodeName, nickName, delta));
     }
 
     private String executeCommand(String command) {
+
         StringBuilder output = new StringBuilder();
 
         try {
